@@ -1,0 +1,47 @@
+{
+  "_nota": "Perfiles de motor. 'prefs' son nombres de variables de ClientPrefs.data (backend/ClientPrefs.hx de P-Slice). Si un nombre no existe se ignora y queda en .P-Hslice/phslice.log. Ajusta los nombres a tu versión de P-Slice.",
+  "engines": [
+    {
+      "id": "phslice",
+      "name": "PHSLICE",
+      "short": "Psych + V-Slice + P-Slice",
+      "desc": "Motor por defecto de P-Hslice. Trae Psych Engine, V-Slice y P-Slice ya fusionados: scripts Lua/HScript de Psych, Freeplay, resultados y selector de personaje estilo V-Slice, y las mejoras de P-Slice.",
+      "padStyle": "hitbox",
+      "prefs": {}
+    },
+    {
+      "id": "psych",
+      "name": "Psych Engine",
+      "short": "Estilo clásico Psych",
+      "desc": "Menús y comportamiento clásico de Psych Engine. Apaga las pantallas estilo V-Slice que P-Slice ofrece como opción.",
+      "padStyle": "hitbox",
+      "prefs": {
+        "vsliceFreeplay": false,
+        "vsliceResults": false,
+        "vsliceCharSelect": false,
+        "vslicePause": false
+      }
+    },
+    {
+      "id": "vslice",
+      "name": "V-Slice",
+      "short": "Estilo Friday Night Funkin' nuevo",
+      "desc": "Freeplay, pantalla de resultados, selector de personaje y pausa al estilo V-Slice (el FNF actual). Los controles pasan a estilo V-Slice.",
+      "padStyle": "vslice",
+      "prefs": {
+        "vsliceFreeplay": true,
+        "vsliceResults": true,
+        "vsliceCharSelect": true,
+        "vslicePause": true
+      }
+    },
+    {
+      "id": "pslice",
+      "name": "P-Slice",
+      "short": "P-Slice tal cual",
+      "desc": "P-Slice con sus ajustes originales, sin cambios de P-Hslice.",
+      "padStyle": "hitbox",
+      "prefs": {}
+    }
+  ]
+}
