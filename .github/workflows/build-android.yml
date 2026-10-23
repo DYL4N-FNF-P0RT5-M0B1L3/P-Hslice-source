@@ -23,9 +23,14 @@ jobs:
       - name: Descargar P-Slice (Psych Engine + V-Slice ya fusionados)
         run: git clone --depth 1 --branch "${{ github.event.inputs.pslice_ref || 'master' }}" https://github.com/Psych-Slice/P-Slice.git pslice
 
-      - uses: krdlab/setup-haxe@v1
-        with:
-          haxe-version: 4.3.7
+      - name: Instalar Haxe 4.3.7 (Nativo)
+        run: |
+          sudo add-apt-repository ppa:haxe/haxe -y
+          sudo apt-get update
+          sudo apt-get install haxe -y
+          mkdir -p ~/haxelib
+          haxelib setup ~/haxelib
+          haxe -version
 
       - uses: actions/setup-java@v5
         with:
@@ -34,11 +39,17 @@ jobs:
 
       - uses: android-actions/setup-android@v3
 
-      - name: NDK
+      - name: Descargar y Configurar NDK r27c (Nativo)
         id: ndk
-        uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r27c   # si hxcpp se queja del NDK, prueba r26d o r25c
+        run: |
+          echo "Descargando Android NDK r27c..."
+          wget -q https://dl.google.com/android/repository/android-ndk-r27c-linux.zip
+          unzip -q android-ndk-r27c-linux.zip
+          mkdir -p $ANDROID_HOME/ndk
+          mv android-ndk-r27c $ANDROID_HOME/ndk/27.c
+          echo "ndk-path=$ANDROID_HOME/ndk/27.c" >> $GITHUB_OUTPUT
+          echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/27.c" >> $GITHUB_ENV
+          rm android-ndk-r27c-linux.zip
 
       - uses: actions/cache@v4
         with:
@@ -89,3 +100,4 @@ jobs:
           name: P-Hslice-APK
           path: out/*.apk
           if-no-files-found: error
+          
