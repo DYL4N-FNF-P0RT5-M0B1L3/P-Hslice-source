@@ -108,26 +108,6 @@ jobs:
           sed -i 's/m\.closeAll()/closeAll()/g' pslice/source/phslice/ui/Menu.hx || true
           sed -i 's/c\.setFilters(\[\])/c.filters = \[\]/g' pslice/source/phslice/PotatoMode.hx || true
 
-      - name: Crear google-services.json falso para Firebase
-        run: |
-          echo '{
-            "project_info": {
-              "project_number": "1234567890",
-              "project_id": "dummy-phslice"
-            },
-            "client": [{
-              "client_info": {
-                "mobilesdk_app_id": "1:1234567890:android:1234567890abcdef",
-                "android_client_info": {
-                  "package_name": "com.psych.slice"
-                }
-              },
-              "api_key": [{"current_key": "AIzaSyDummyKeyForBuildOnly123456"}],
-              "services": { "analytics_service": { "status": 1 } }
-            }],
-            "configuration_version": "1"
-          }' > pslice/google-services.json
-
       - name: Configurar Lime para Android
         run: |
           export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
